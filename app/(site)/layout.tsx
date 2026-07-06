@@ -1,10 +1,9 @@
 import type React from "react"
-import "@/styles/globals.css" // Tailwind & global styles
 import Layout from "@/components/layout"
 
 export const metadata = {
-  title: "Moatez – Terminal Portfolio",
-  description: "CTF write-ups, projects and more",
+  title: "3angour — Terminal Portfolio",
+  description: "CTF write-ups, security research and projects",
 }
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {

@@ -65,7 +65,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={cycleTheme}
-      className="p-2 rounded border transition-all duration-200 text-sm font-mono border-terminal-accent dark:border-bluef-accent light:border-gray-300 hover:bg-terminal-accent/10 dark:hover:bg-bluef-accent/10 light:hover:bg-gray-100 text-terminal-text dark:text-bluef-text light:text-gray-800"
+      className="p-2 rounded border transition-all duration-200 text-sm font-mono terminal:border-terminal-accent/50 terminal:hover:border-terminal-accent terminal:hover:bg-terminal-accent/10 terminal:text-terminal-text light:border-gray-300 light:hover:bg-gray-100 light:text-light-text"
       aria-label="Cycle theme"
     >
       {getThemeIcon()}
