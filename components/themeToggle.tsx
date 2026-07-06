@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Sun, Terminal } from "lucide-react"
 
 type Theme = "terminal" | "light"
 
@@ -36,39 +37,26 @@ export default function ThemeToggle() {
     }
   }, [theme, mounted])
 
-  const cycleTheme = () => {
-    const themes: Theme[] = ["terminal", "light"]
-    const currentIndex = themes.indexOf(theme)
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
-  }
-
-  const getThemeIcon = () => {
-    switch (theme) {
-      case "terminal":
-        return "💻 Terminal"
-      case "light":
-        return "☀️ Light"
-      default:
-        return "💻 Terminal"
-    }
-  }
+  const toggleTheme = () => setTheme(theme === "terminal" ? "light" : "terminal")
 
   if (!mounted) {
     return (
-      <div className="p-2 rounded border border-gray-500">
-        <span className="text-sm">🌙</span>
-      </div>
+      <div className="w-9 h-9 rounded-md border terminal:border-terminal-accent/30 light:border-gray-300" aria-hidden="true" />
     )
   }
 
   return (
     <button
-      onClick={cycleTheme}
-      className="p-2 rounded border transition-all duration-200 text-sm font-mono terminal:border-terminal-accent/50 terminal:hover:border-terminal-accent terminal:hover:bg-terminal-accent/10 terminal:text-terminal-text light:border-gray-300 light:hover:bg-gray-100 light:text-light-text"
-      aria-label="Cycle theme"
+      onClick={toggleTheme}
+      className="group relative w-9 h-9 flex items-center justify-center rounded-md border transition-all duration-300 terminal:border-terminal-accent/30 terminal:text-terminal-accent terminal:hover:border-terminal-accent terminal:hover:bg-terminal-accent/10 terminal:hover:shadow-[0_0_16px_rgba(255,107,61,0.35)] light:border-gray-300 light:text-light-accent light:hover:border-light-accent light:hover:bg-orange-50"
+      aria-label={theme === "terminal" ? "Switch to light theme" : "Switch to terminal theme"}
+      title={theme === "terminal" ? "Switch to light theme" : "Switch to terminal theme"}
     >
-      {getThemeIcon()}
+      {theme === "terminal" ? (
+        <Sun className="w-4 h-4 transition-transform duration-300 group-hover:rotate-45 group-hover:scale-110" />
+      ) : (
+        <Terminal className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+      )}
     </button>
   )
 }
