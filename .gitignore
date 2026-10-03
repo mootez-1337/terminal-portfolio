@@ -27,3 +27,6 @@ yarn-error.log*
 next-env.d.ts
 
 /blog.zip/
+
+# local working copy of CTF writeups (published copies live in content/blog/)
+/writeups/

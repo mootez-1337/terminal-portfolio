@@ -1,4 +1,13 @@
+import type { Metadata } from "next"
 import Reveal from "@/components/effects/reveal"
+import { site } from "@/lib/site"
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Mootez Ben Slimen (3angour) — Cybersecurity Master's student at MedTech, UZH Deep Dive into Blockchain alum, IEEE WETICE 2026 author, CTF player and challenge author.",
+  alternates: { canonical: "/about" },
+}
 
 export default function AboutPage() {
   const skills = {
@@ -9,15 +18,33 @@ export default function AboutPage() {
       "SSDLC",
       "Network Analysis",
       "Penetration Testing",
+      "OSINT",
       "CTF (Forensics, Web, MISC, Pyjails)",
     ],
+    "AI & Automation": [
+      "RAG Pipelines",
+      "LLM Integration (Ollama, local & API)",
+      "Agentic Workflow Design",
+      "AI Red-Teaming",
+      "Python Automation",
+      "LightGBM",
+      "ChromaDB",
+      "Whisper",
+      "Semantic Embeddings",
+    ],
+    "Blockchain & Web3": ["Smart Contracts", "Token Incentive Design", "UZH DDiB"],
     "Web Development": ["HTML", "CSS", "JavaScript", "Node.js", "Next.js", "React.js", "Tailwind CSS"],
-    "AI & Data": ["LightGBM", "RAG Pipelines", "ChromaDB", "Ollama (Local LLMs)", "Whisper", "Semantic Embeddings"],
     "Tools & Databases": ["PostgreSQL", "MySQL", "SQLite", "Steampipe", "Prisma ORM", "Docker", "Git", "FastAPI"],
     "DevOps & Deployment": ["Vercel", "GitHub Actions (CI/CD)", "Docker Compose", "Nginx"],
   }
 
   const achievements = [
+    {
+      title: "CSAW CTF 2026",
+      description: "Quals 1st in MENA / 2nd worldwide — qualified for Finals",
+      date: "2026",
+      highlight: true,
+    },
     {
       title: "Claw The Flag CTF",
       description: "6th place",
@@ -82,6 +109,20 @@ export default function AboutPage() {
 
   const experience = [
     {
+      title: "AI Offensive Security Intern",
+      company: "AnTitech",
+      period: "Jul 2026 - Present",
+      description:
+        "Building an observer system that gathers data to help autonomous AI red-teaming agents discover new jailbreak, prompt-injection and data-poisoning techniques against target LLMs and chatbots.",
+    },
+    {
+      title: "OSINT Automation Intern",
+      company: "Mazars Forvis",
+      period: "Jun 2026",
+      description:
+        "Built an OSINT automation platform and data pipelines to collect, normalize and correlate open-source intelligence for security assessments.",
+    },
+    {
       title: "Graduation Internship",
       company: "ITC-Consulting",
       period: "Feb 2025 - May 2025",
@@ -143,7 +184,8 @@ export default function AboutPage() {
                   Mootez Ben Slimen (3angour)
                 </strong>
                 , Master's student in Cybersecurity with a strong background in software engineering, CTF competitions
-                and Python automation. Excellence Scholarship recipient at MedTech University.
+                and Python automation. Excellence Scholarship recipient at MedTech University, and a full-scholarship
+                alum of the University of Zurich's Deep Dive into Blockchain summer school.
               </p>
               <p className="leading-relaxed">
                 Experienced in secure system development, vulnerability research and cybersecurity event organization.
@@ -174,6 +216,18 @@ export default function AboutPage() {
               </div>
               <p className="terminal:text-terminal-text light:text-light-text opacity-80">
                 Master's Degree in Cybersecurity • Excellence Scholarship (75%) • Tunis, Tunisia
+              </p>
+            </div>
+
+            <div className="border-l-2 terminal:border-terminal-accent light:border-light-accent pl-4 py-2">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-bold terminal:text-terminal-text light:text-light-text font-mono">
+                  University of Zurich (UZH), Switzerland
+                </h3>
+                <span className="text-sm terminal:text-terminal-accent light:text-light-accent font-mono">2026</span>
+              </div>
+              <p className="terminal:text-terminal-text light:text-light-text opacity-80">
+                Deep Dive into Blockchain (DDiB) Summer School • Full Scholarship
               </p>
             </div>
 
@@ -299,17 +353,30 @@ export default function AboutPage() {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="border terminal:border-terminal-accent/30 light:border-gray-300 rounded-lg p-4 ember-card"
+                className={`rounded-lg p-4 ember-card border ${
+                  achievement.highlight
+                    ? "md:col-span-2 terminal:border-terminal-accent light:border-light-accent terminal:bg-terminal-accent/5 light:bg-orange-50"
+                    : "terminal:border-terminal-accent/30 light:border-gray-300"
+                }`}
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-2 gap-4">
                   <h3 className="font-bold terminal:text-terminal-text light:text-light-text font-mono">
+                    {achievement.highlight && (
+                      <span className="terminal:text-terminal-accent light:text-light-accent">★ </span>
+                    )}
                     {achievement.title}
                   </h3>
-                  <span className="text-sm terminal:text-terminal-accent light:text-light-accent font-mono">
+                  <span className="text-sm terminal:text-terminal-accent light:text-light-accent font-mono shrink-0">
                     {achievement.date}
                   </span>
                 </div>
-                <p className="terminal:text-terminal-text light:text-light-text opacity-80 text-sm">
+                <p
+                  className={`font-mono text-sm ${
+                    achievement.highlight
+                      ? "terminal:text-terminal-accent light:text-light-accent"
+                      : "terminal:text-terminal-text light:text-light-text opacity-80"
+                  }`}
+                >
                   {achievement.description}
                 </p>
               </div>
@@ -388,20 +455,20 @@ export default function AboutPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <a
-              href="mailto:mootezmootez6@gmail.com"
+              href={`mailto:${site.email}`}
               className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded terminal:hover:border-terminal-accent light:hover:border-gray-400 ember-card"
             >
               <span className="text-2xl">📧</span>
-              <div className="font-mono">
+              <div className="font-mono min-w-0">
                 <div className="terminal:text-terminal-text light:text-light-text font-bold">Email</div>
-                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">
-                  mootezmootez6@gmail.com
+                <div className="terminal:text-terminal-accent light:text-light-accent text-sm truncate">
+                  {site.email}
                 </div>
               </div>
             </a>
 
             <a
-              href="https://linkedin.com/in/mootez-ben-slimen"
+              href={site.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded terminal:hover:border-terminal-accent light:hover:border-gray-400 ember-card"
@@ -413,13 +480,82 @@ export default function AboutPage() {
               </div>
             </a>
 
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded terminal:hover:border-terminal-accent light:hover:border-gray-400 ember-card"
+            >
+              <span className="text-2xl">🐙</span>
+              <div className="font-mono">
+                <div className="terminal:text-terminal-text light:text-light-text font-bold">GitHub</div>
+                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">
+                  @{site.githubUser}
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={site.gitlab}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded terminal:hover:border-terminal-accent light:hover:border-gray-400 ember-card"
+            >
+              <span className="text-2xl">🦊</span>
+              <div className="font-mono">
+                <div className="terminal:text-terminal-text light:text-light-text font-bold">GitLab</div>
+                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">
+                  @{site.gitlabUser}
+                </div>
+              </div>
+            </a>
+
+            {site.ctftime && (
+              <a
+                href={site.ctftime}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded terminal:hover:border-terminal-accent light:hover:border-gray-400 ember-card"
+              >
+                <span className="text-2xl">🚩</span>
+                <div className="font-mono">
+                  <div className="terminal:text-terminal-text light:text-light-text font-bold">CTFtime</div>
+                  <div className="terminal:text-terminal-accent light:text-light-accent text-sm">Competition log</div>
+                </div>
+              </a>
+            )}
+
             <div className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/30 light:border-gray-300 rounded ember-card">
               <span className="text-2xl">📍</span>
               <div className="font-mono">
                 <div className="terminal:text-terminal-text light:text-light-text font-bold">Location</div>
-                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">Ariana, Tunisia</div>
+                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">{site.location}</div>
               </div>
             </div>
+          </div>
+        </section>
+      </Reveal>
+
+      {/* Resume */}
+      <Reveal>
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 terminal:text-terminal-accent light:text-light-accent font-mono">
+            $ wget resume.pdf
+          </h2>
+          <div className="max-w-md">
+            <a
+              href={site.resume.aiSecurity}
+              download
+              className="flex items-center gap-3 p-4 border terminal:border-terminal-accent/60 light:border-light-accent/60 rounded terminal:bg-terminal-accent/5 light:bg-orange-50 terminal:hover:border-terminal-accent light:hover:border-light-accent ember-card"
+            >
+              <span className="text-2xl">📄</span>
+              <div className="font-mono">
+                <div className="terminal:text-terminal-text light:text-light-text font-bold">Résumé</div>
+                <div className="terminal:text-terminal-accent light:text-light-accent text-sm">
+                  PDF • AI &amp; offensive security
+                </div>
+              </div>
+            </a>
           </div>
         </section>
       </Reveal>

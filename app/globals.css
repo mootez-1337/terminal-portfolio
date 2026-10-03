@@ -169,6 +169,7 @@
   }
 
   .prose pre {
+    position: relative;
     background: #120b08 !important;
     padding: 0 !important;
     border-radius: 0.5rem;

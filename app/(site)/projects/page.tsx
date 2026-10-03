@@ -1,13 +1,33 @@
+import type { Metadata } from "next"
 import Reveal from "@/components/effects/reveal"
+import { site, repo } from "@/lib/site"
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "Security tooling, AI platforms, blockchain work and CTF contributions by Mootez Ben Slimen (3angour).",
+  alternates: { canonical: "/projects" },
+}
 
 export default function ProjectsPage() {
   const projects = [
+    {
+      title: "OceanClean — Blockchain Ocean Cleanup Marketplace",
+      description:
+        "Final project for Group 13 at the University of Zurich's Deep Dive into Blockchain summer school. Closes the trust gap that keeps ocean cleanup underfunded: a marketplace where verified collectors are paid directly in OCT tokens for proven waste retrieval. Tamper-resistant payout model verified independently before release and weighted by material value and retrieval difficulty, plus a self-sustaining funding loop routing recycler purchases and donor contributions into a liquidity pool.",
+      technologies: ["Blockchain", "Smart Contracts", "Token Design", "UZH DDiB"],
+      // Repo is private (owned by a teammate) — a public visitor would get a 404.
+      github: null,
+      demo: null,
+      status: "Completed",
+      featured: true,
+    },
     {
       title: "CapAI — Founder Intelligence Platform",
       description:
         "Multi-source founder data aggregation engine (FastAPI, aiohttp, asyncio) normalizing LinkedIn, GitHub, Product Hunt and DEV.to profiles into structured JSON. Identity resolution via multi-engine search cascade + GitHub API verification. LightGBM classifier predicting startup acquisition/IPO success — ROC-AUC 0.84 on 196K companies.",
       technologies: ["FastAPI", "asyncio", "LightGBM", "Python", "Crunchbase Data"],
-      github: "https://github.com/Moatez-69",
+      github: repo("capAI-hackathon"),
       demo: null,
       status: "Completed",
       featured: true,
@@ -17,7 +37,7 @@ export default function ProjectsPage() {
       description:
         "Privacy-first mobile + backend system that scans documents, images, audio and calendars on-device and indexes them with a local LLM (Qwen2.5-3B via Ollama) — no data ever leaves the network. Multi-modal ingestion (PyMuPDF, BLIP, Whisper), self-verifying RAG pipeline with ChromaDB, React Native/Expo app. Built for AIMinds Hackathon (5th place).",
       technologies: ["Ollama", "ChromaDB", "Whisper", "BLIP", "React Native", "FastAPI", "Docker Compose"],
-      github: "https://github.com/Moatez-69",
+      github: repo("forgot-me"),
       demo: null,
       status: "Completed",
       featured: true,
@@ -43,11 +63,21 @@ export default function ProjectsPage() {
       featured: true,
     },
     {
+      title: "claude-bug-bounty",
+      description:
+        "Claude Code skill for AI-assisted bug bounty hunting — recon, IDOR, XSS, SSRF, OAuth, GraphQL and LLM prompt-injection workflows, with report generation built in.",
+      technologies: ["Python", "Claude Code", "Bug Bounty", "Automation"],
+      github: repo("claude-bug-bounty"),
+      demo: null,
+      status: "Active",
+      featured: false,
+    },
+    {
       title: "Secure Web Application — OWASP Top 10",
       description:
         "Deliberately vulnerable Flask web application (SQLite3) implementing the OWASP Top 10 for educational purposes, with SSDLC principles applied to identify, mitigate and fix each flaw.",
       technologies: ["Flask", "SQLite3", "OWASP Top 10", "SSDLC"],
-      github: null,
+      github: repo("app-sec-project"),
       demo: null,
       status: "Active",
       featured: false,
@@ -77,8 +107,8 @@ export default function ProjectsPage() {
       description:
         "This very website! A terminal-themed portfolio and blog built with Next.js, featuring theme switching, animations and markdown blog support for CTF writeups.",
       technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      github: "https://github.com/Moatez-69/terminal-portfolio",
-      demo: "https://blog.3angour.tech/",
+      github: repo("terminal-portfolio"),
+      demo: site.url,
       status: "Active",
       featured: false,
     },
@@ -243,7 +273,7 @@ export default function ProjectsPage() {
           <p>
             Check out my{" "}
             <a
-              href="https://github.com/Moatez-69"
+              href={site.github}
               target="_blank"
               rel="noopener noreferrer"
               className="terminal:text-terminal-accent light:text-light-accent hover:underline"

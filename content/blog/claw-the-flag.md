@@ -1,5 +1,5 @@
 ---
-title: "# Claw the Flag CTF Writeups"
+title: "Claw the Flag CTF Writeups"
 date: "2025-12-28"
 ---
 This writeup covers two challenges from the Claw the Flag CTF: **pyjail** and **F.R.E.E.D.O.M**. Both challenges involved clever exploitation techniques to bypass restrictions and retrieve flags.

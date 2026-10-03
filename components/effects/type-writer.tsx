@@ -14,7 +14,7 @@ interface TypeWriterProps {
  * Lines starting with "$" render in the accent color (commands),
  * other lines render as output.
  */
-export default function TypeWriter({ lines, speed = 32, startDelay = 400, className = "" }: TypeWriterProps) {
+export default function TypeWriter({ lines, speed = 20, startDelay = 250, className = "" }: TypeWriterProps) {
   const [lineIdx, setLineIdx] = useState(0)
   const [charIdx, setCharIdx] = useState(0)
   const [started, setStarted] = useState(false)
@@ -36,7 +36,7 @@ export default function TypeWriter({ lines, speed = 32, startDelay = 400, classN
     const t = setTimeout(() => {
       setLineIdx((l) => l + 1)
       setCharIdx(0)
-    }, 350)
+    }, 220)
     return () => clearTimeout(t)
   }, [started, lineIdx, charIdx, lines, speed])
 

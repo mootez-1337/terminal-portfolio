@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import { site } from "@/lib/site"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -20,16 +21,24 @@ export default function ContactPage() {
     })
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  /**
+   * Hands the message off to the visitor's mail client, pre-filled.
+   * No backend, no third-party form service, and nothing is silently dropped —
+   * the visitor sees the composed mail and presses send themselves.
+   */
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission - replace with actual form handler
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setSubmitted(true)
-      setFormData({ name: "", email: "", subject: "", message: "" })
-    }, 1000)
+    const body = `${formData.message}\n\n—\n${formData.name} <${formData.email}>`
+    const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+      formData.subject,
+    )}&body=${encodeURIComponent(body)}`
+
+    window.location.href = mailto
+
+    setIsSubmitting(false)
+    setSubmitted(true)
   }
 
   if (submitted) {
@@ -37,18 +46,27 @@ export default function ContactPage() {
       <div className="max-w-2xl mx-auto">
         <div className="border terminal:border-terminal-accent light:border-gray-300 rounded-lg p-8 terminal:bg-terminal-accent/5 light:bg-gray-50">
           <div className="text-center font-mono">
-            <div className="text-4xl mb-4">✅</div>
+            <div className="text-4xl mb-4">📬</div>
             <h2 className="text-2xl font-bold mb-4 terminal:text-terminal-accent light:text-light-accent">
-              $ message_sent.success
+              $ compose --handoff
             </h2>
-            <p className="terminal:text-terminal-text light:text-light-text mb-6">
-              Thanks for reaching out! I'll get back to you soon.
+            <p className="terminal:text-terminal-text light:text-light-text mb-2">
+              Your mail client should have opened with the message ready to go. Press send there and it reaches me.
+            </p>
+            <p className="terminal:text-terminal-text light:text-light-text opacity-70 text-sm mb-6">
+              Nothing happened? Mail me directly at{" "}
+              <a
+                href={`mailto:${site.email}`}
+                className="terminal:text-terminal-accent light:text-light-accent hover:underline"
+              >
+                {site.email}
+              </a>
             </p>
             <button
               onClick={() => setSubmitted(false)}
               className="terminal:text-terminal-accent light:text-light-accent hover:underline"
             >
-              ← $ send_another_message
+              ← $ write_another_message
             </button>
           </div>
         </div>
@@ -175,16 +193,38 @@ export default function ContactPage() {
                 Quick Contact
               </h3>
               <div className="space-y-2 font-mono text-sm">
-                <p className="terminal:text-terminal-text light:text-light-text opacity-80">
+                <p className="terminal:text-terminal-text light:text-light-text opacity-80 break-all">
                   📧{" "}
                   <a
-                    href="mailto:mootezmootez6@gmail.com"
+                    href={`mailto:${site.email}`}
                     className="terminal:text-terminal-accent light:text-light-accent hover:underline"
                   >
-                    mootezmootez6@gmail.com
+                    {site.email}
                   </a>
                 </p>
-                <p className="terminal:text-terminal-text light:text-light-text opacity-80">📍 Ariana, Tunisia</p>
+                <p className="terminal:text-terminal-text light:text-light-text opacity-80">
+                  🐙{" "}
+                  <a
+                    href={site.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="terminal:text-terminal-accent light:text-light-accent hover:underline"
+                  >
+                    @{site.githubUser}
+                  </a>
+                </p>
+                <p className="terminal:text-terminal-text light:text-light-text opacity-80">
+                  💼{" "}
+                  <a
+                    href={site.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="terminal:text-terminal-accent light:text-light-accent hover:underline"
+                  >
+                    Mootez Ben Slimen
+                  </a>
+                </p>
+                <p className="terminal:text-terminal-text light:text-light-text opacity-80">📍 {site.location}</p>
               </div>
             </div>
 

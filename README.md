@@ -77,7 +77,7 @@ blog/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/3angour/terminal-portfolio.git
+   git clone https://github.com/mootez-1337/terminal-portfolio.git
    cd terminal-portfolio
    ```
 
@@ -204,7 +204,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Mootez Ben Slimen (3angour)**
-- Email: mootezmootez6@gmail.com
+- Email: mootez.benslimen@medtech.tn
 - LinkedIn: [Mootez Ben Slimen](https://linkedin.com/in/mootez-ben-slimen)
 - Location: Ariana, Tunisia
 
