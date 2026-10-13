@@ -1,0 +1,13 @@
+/*
+ * RED CELL — design system entry point.
+ * Each partial is small and focused; edit tokens.css to re-skin the whole site.
+ * (Post-page styles live in styles/prose.css and the shell in styles/terminal.css —
+ *  they are only loaded where they are used.)
+ */
+@import "../styles/tokens.css";
+@import "../styles/base.css";
+@import "../styles/motion.css";
+@import "../styles/layout.css";
+@import "../styles/components.css";
+@import "../styles/hero.css";
+@import "../styles/pages.css";

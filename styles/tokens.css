@@ -1,0 +1,63 @@
+/* ============ RED CELL — design tokens ============ */
+
+:root {
+  /* surfaces */
+  --bg: #0a0a0b;
+  --bg-raise: #0f1012;
+  --surface: #141518;
+  --surface-2: #1b1d21;
+  --surface-3: #24262b;
+
+  /* lines */
+  --line: rgba(237, 232, 223, 0.09);
+  --line-2: rgba(237, 232, 223, 0.16);
+  --line-3: rgba(237, 232, 223, 0.3);
+
+  /* text — all ≥ 4.5:1 on --bg */
+  --text: #ede8df; /* bone */
+  --text-2: #b3b6bc;
+  --text-3: #868b94;
+
+  /* signal */
+  --red: #ff3b47;
+  --red-hot: #ff6b74;
+  --red-deep: #b4202b;
+  --red-ink: #2a0d10;
+  --red-a10: rgba(255, 59, 71, 0.1);
+  --red-a18: rgba(255, 59, 71, 0.18);
+  --red-a35: rgba(255, 59, 71, 0.35);
+  --cyan: #5ee6f0; /* used only for the RGB-split glitch layer */
+  --amber: #ffb547;
+  --ok: #46e08e;
+
+  /* type — --font-* are injected on <html> by next/font (app/fonts.ts) */
+  --ff-display: var(--font-display, "Chakra Petch"), "Arial Narrow", system-ui, sans-serif;
+  --ff-sans: var(--font-sans, "IBM Plex Sans"), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ff-mono: var(--font-mono, "IBM Plex Mono"), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-h3: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
+  --fs-h1: clamp(2.8rem, 1.6rem + 5.5vw, 6rem);
+
+  /* layout */
+  --container: 1240px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --header-h: 68px;
+  --cut: 14px; /* chamfered corner size */
+  --radius: 2px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-snap: cubic-bezier(0.2, 0.9, 0.1, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 800ms;
+
+  color-scheme: dark;
+}

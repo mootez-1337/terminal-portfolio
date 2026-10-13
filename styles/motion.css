@@ -1,0 +1,530 @@
+/* ============ motion ============ */
+
+/* ---------- scroll reveals (see components/motion/reveal-observer.tsx) ---------- */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+}
+
+.js [data-reveal="left"] {
+  transform: translate3d(-32px, 0, 0);
+}
+
+.js [data-reveal="fade"] {
+  transform: none;
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- load-in for above-the-fold content ---------- */
+
+[data-enter] {
+  animation: enter 0.9s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 1ms + 120ms);
+}
+
+/* hold hero entrances while the first-visit intro plays */
+html[data-intro="play"] [data-enter] {
+  animation-play-state: paused;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* ---------- glitch text (components/motion/glitch-text.tsx) ---------- */
+
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+/* the two colour layers: generated content, so they never exist in the DOM text */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  clip-path: inset(50% 0 50% 0);
+}
+
+.glitch::before {
+  color: var(--red);
+  animation: glitch-a 4.6s steps(1, end) infinite;
+}
+
+.glitch::after {
+  color: var(--cyan);
+  opacity: 0.75;
+  animation: glitch-b 4.6s steps(1, end) infinite;
+}
+
+/* boot: a burst when the element first appears, then the idle loop */
+.glitch--boot::before {
+  animation:
+    glitch-burst-a 0.7s steps(1, end) 0.25s both,
+    glitch-a 4.6s steps(1, end) 1.4s infinite;
+}
+
+.glitch--boot::after {
+  animation:
+    glitch-burst-b 0.7s steps(1, end) 0.25s both,
+    glitch-b 4.6s steps(1, end) 1.4s infinite;
+}
+
+/* quieter variant for long titles (post pages): burst only */
+.glitch--quiet::before {
+  animation: glitch-burst-a 0.7s steps(1, end) 0.25s both;
+}
+
+.glitch--quiet::after {
+  animation: glitch-burst-b 0.7s steps(1, end) 0.25s both;
+}
+
+html[data-intro="play"] .glitch--boot::before,
+html[data-intro="play"] .glitch--boot::after {
+  animation-play-state: paused;
+}
+
+/* hover on the glitch (or a link containing it) → fast glitch */
+a:hover .glitch::before,
+.glitch:hover::before {
+  animation: glitch-burst-a 0.5s steps(1, end) infinite;
+}
+
+a:hover .glitch::after,
+.glitch:hover::after {
+  animation: glitch-burst-b 0.5s steps(1, end) infinite;
+}
+
+@keyframes glitch-a {
+  0%,
+  86%,
+  100% {
+    clip-path: inset(50% 0 50% 0);
+    transform: none;
+  }
+  87% {
+    clip-path: inset(12% 0 70% 0);
+    transform: translate(-4px, 0);
+  }
+  88.5% {
+    clip-path: inset(62% 0 18% 0);
+    transform: translate(5px, 0);
+  }
+  90% {
+    clip-path: inset(38% 0 44% 0);
+    transform: translate(-2px, 0);
+  }
+  91.5% {
+    clip-path: inset(50% 0 50% 0);
+  }
+}
+
+@keyframes glitch-b {
+  0%,
+  86.5%,
+  100% {
+    clip-path: inset(50% 0 50% 0);
+    transform: none;
+  }
+  87.5% {
+    clip-path: inset(70% 0 8% 0);
+    transform: translate(4px, 0);
+  }
+  89% {
+    clip-path: inset(20% 0 64% 0);
+    transform: translate(-5px, 0);
+  }
+  91% {
+    clip-path: inset(50% 0 50% 0);
+  }
+}
+
+@keyframes glitch-burst-a {
+  0% {
+    clip-path: inset(8% 0 72% 0);
+    transform: translate(-6px, 0);
+  }
+  14% {
+    clip-path: inset(55% 0 25% 0);
+    transform: translate(6px, 0);
+  }
+  28% {
+    clip-path: inset(30% 0 48% 0);
+    transform: translate(-3px, 0);
+  }
+  42% {
+    clip-path: inset(78% 0 4% 0);
+    transform: translate(4px, 0);
+  }
+  56% {
+    clip-path: inset(18% 0 66% 0);
+    transform: translate(-2px, 0);
+  }
+  70%,
+  100% {
+    clip-path: inset(50% 0 50% 0);
+    transform: none;
+  }
+}
+
+@keyframes glitch-burst-b {
+  0% {
+    clip-path: inset(64% 0 16% 0);
+    transform: translate(5px, 0);
+  }
+  14% {
+    clip-path: inset(10% 0 74% 0);
+    transform: translate(-6px, 0);
+  }
+  28% {
+    clip-path: inset(44% 0 36% 0);
+    transform: translate(3px, 0);
+  }
+  42% {
+    clip-path: inset(4% 0 84% 0);
+    transform: translate(-4px, 0);
+  }
+  56%,
+  100% {
+    clip-path: inset(50% 0 50% 0);
+    transform: none;
+  }
+}
+
+/* ---------- small loops ---------- */
+
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 0.15em;
+  vertical-align: -0.18em;
+  background: var(--red);
+  animation: blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: none;
+  background: var(--red);
+  border-radius: 50%;
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--red);
+  animation: pulse 2s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* ---------- page transitions (View Transitions API via next-view-transitions) ---------- */
+
+::view-transition-old(root) {
+  animation: vt-out 280ms var(--ease-in) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-in 560ms var(--ease-out) 60ms both;
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(18px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+/* ---------- first-visit intro (components/motion/intro.tsx) ---------- */
+
+.intro {
+  display: none;
+}
+
+html[data-intro="play"] .intro,
+html[data-intro="exit"] .intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  /* failsafe: vanish even if JS never loads */
+  animation: intro-failsafe 0.4s linear 4.5s forwards;
+}
+
+.intro__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--bg);
+  transition: transform 0.6s var(--ease-snap);
+}
+
+.intro__panel--top {
+  top: 0;
+  border-bottom: 1px solid var(--red-a35);
+}
+
+.intro__panel--bottom {
+  bottom: 0;
+}
+
+.intro__content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 18px;
+  padding: var(--gutter);
+  font-family: var(--ff-mono);
+  font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.875rem);
+  color: var(--text-2);
+  width: min(560px, 100%);
+  margin-inline: auto;
+  transition: opacity 0.25s ease;
+}
+
+.intro__brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+.intro__ver {
+  font-family: var(--ff-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--red);
+}
+
+.intro__log {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  min-height: 7.5em;
+}
+
+.intro__log li {
+  opacity: 0;
+  animation: intro-line 0.01s linear both;
+  animation-delay: calc(var(--i) * 190ms + 150ms);
+}
+
+.intro__tag {
+  color: var(--ok);
+}
+
+.intro__tag--wait {
+  color: var(--amber);
+}
+
+.intro__bar {
+  height: 2px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+
+.intro__bar span {
+  display: block;
+  height: 100%;
+  background: var(--red);
+  transform-origin: left;
+  animation: intro-bar 1.25s var(--ease-out) 0.2s both;
+}
+
+.intro__granted {
+  position: relative;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 1rem + 3vw, 2.6rem);
+  letter-spacing: 0.08em;
+  color: var(--red);
+  opacity: 0;
+  animation: intro-granted 0.5s steps(1, end) 1.45s both;
+}
+
+.intro__skip {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-family: var(--ff-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  border: 1px solid var(--line-2);
+  transition:
+    color var(--dur-fast),
+    border-color var(--dur-fast);
+}
+
+.intro__skip:hover {
+  color: var(--text);
+  border-color: var(--red);
+}
+
+html[data-intro="exit"] .intro__content,
+html[data-intro="exit"] .intro__skip {
+  opacity: 0;
+}
+
+html[data-intro="exit"] .intro__panel--top {
+  transform: translateY(-101%);
+}
+
+html[data-intro="exit"] .intro__panel--bottom {
+  transform: translateY(101%);
+}
+
+@keyframes intro-line {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-granted {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+    transform: translateX(-6px) skewX(-8deg);
+    text-shadow: 3px 0 var(--cyan);
+  }
+  20% {
+    transform: translateX(5px);
+    text-shadow: -3px 0 var(--cyan);
+  }
+  40% {
+    transform: none;
+    text-shadow: none;
+  }
+  60% {
+    opacity: 0.3;
+  }
+  70%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* ---------- reduced motion: keep layout, drop movement ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .glitch::before,
+  .glitch::after,
+  .caret,
+  .pulse-dot::after {
+    display: none;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
