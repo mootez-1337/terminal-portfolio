@@ -23,7 +23,14 @@ export const site = {
 
   resume: {
     aiSecurity: "/mootez-ben-slimen-resume-ai-security.pdf",
+    socThreatIntel: "/mootez-ben-slimen-resume-soc-threat-intel.pdf",
   },
 } as const
+
+/** Résumé variants offered by every "Résumé" button (the terminal keeps using `resume.aiSecurity`). */
+export const resumes = [
+  { id: "ai", label: "AI Security", meta: "LLM red-teaming & offensive security", href: site.resume.aiSecurity },
+  { id: "soc", label: "SOC & Threat Intel", meta: "Detection, monitoring & threat intelligence", href: site.resume.socThreatIntel },
+] as const
 
 export const repo = (name: string) => `${site.github}/${name}`

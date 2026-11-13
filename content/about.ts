@@ -142,6 +142,11 @@ export const achievements: Achievement[] = [
     date: "2026",
     highlight: true,
   },
+  {
+    title: "Qiangwang Mimic Defense 2026 Quals",
+    description: "62nd of 287 teams — 20 write-ups published",
+    date: "2026",
+  },
   { title: "Claw The Flag CTF", description: "6th place", date: "2025" },
   { title: "Darkes Hour CTF", description: "5th place", date: "2025" },
   { title: "CSAW CTF 2024", description: "Quals 4th in MENA / Finals 5th in MENA", date: "2024" },

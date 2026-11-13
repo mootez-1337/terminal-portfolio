@@ -5,6 +5,7 @@ import SectionHeading from "@/components/ui/section-heading"
 import HighlightCard from "@/components/ui/highlight-card"
 import PostCard from "@/components/ui/post-card"
 import ProjectCard from "@/components/ui/project-card"
+import Sigil from "@/components/ui/sigil"
 import { ArrowRight } from "@/components/ui/icons"
 import { highlights } from "@/content/highlights"
 import { featuredProjects } from "@/content/projects"
@@ -50,15 +51,7 @@ export default function HomePage() {
           <figure className="avatar-frame" data-reveal="left">
             <span className="card__brackets" aria-hidden="true" />
             <div className="avatar-frame__img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/avatar.png"
-                alt={`${site.handle} avatar`}
-                width={300}
-                height={300}
-                loading="lazy"
-                decoding="async"
-              />
+              <Sigil label={site.handle} />
               <span className="avatar-frame__scan" aria-hidden="true" />
             </div>
             <figcaption>

@@ -1,10 +1,11 @@
 import type { CSSProperties } from "react"
 import { Link } from "next-view-transitions"
 import { site } from "@/lib/site"
+import ResumeMenu from "@/components/ui/resume-menu"
 import { highlights } from "@/content/highlights"
 import GlitchText from "@/components/motion/glitch-text"
 import DecryptText from "@/components/motion/decrypt-text"
-import { ArrowRight, Download, Github } from "@/components/ui/icons"
+import { ArrowRight, Github } from "@/components/ui/icons"
 import HeroCanvas from "./hero-canvas"
 import HudClock from "./hud-clock"
 
@@ -83,9 +84,7 @@ export default function Hero() {
               <Link href="/blog" className="btn btn--primary">
                 Read the write-ups <ArrowRight size={16} />
               </Link>
-              <a href={site.resume.aiSecurity} download className="btn btn--ghost">
-                <Download size={16} /> Résumé
-              </a>
+              <ResumeMenu className="btn btn--ghost" />
               <a
                 href={site.github}
                 target="_blank"

@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react"
 import { usePathname } from "next/navigation"
 import { Link } from "next-view-transitions"
-import { site } from "@/lib/site"
+import { resumes, site } from "@/lib/site"
+import ResumeMenu from "@/components/ui/resume-menu"
 import { isActive, navLinks } from "@/lib/nav"
 import { lockScroll, openTerminal } from "@/lib/motion"
 import { Download, Github, TerminalIcon } from "@/components/ui/icons"
@@ -99,10 +100,9 @@ export default function SiteHeader() {
           </nav>
 
           <div className="site-header__actions">
-            <a href={site.resume.aiSecurity} download className="btn btn--ghost btn--sm site-header__resume">
-              <Download size={15} />
-              Résumé
-            </a>
+            <div className="site-header__resume">
+              <ResumeMenu className="btn btn--ghost btn--sm" iconSize={15} align="end" />
+            </div>
             <button
               ref={toggleRef}
               type="button"
@@ -157,9 +157,11 @@ export default function SiteHeader() {
             ))}
           </ul>
           <div className="mobile-menu__extras">
-            <a href={site.resume.aiSecurity} download className="btn btn--primary">
-              <Download size={16} /> Download résumé
-            </a>
+            {resumes.map((r, i) => (
+              <a key={r.id} href={r.href} download className={`btn ${i === 0 ? "btn--primary" : "btn--ghost"}`}>
+                <Download size={16} /> Résumé — {r.label}
+              </a>
+            ))}
             <a href={site.github} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
               <Github size={16} /> GitHub
             </a>

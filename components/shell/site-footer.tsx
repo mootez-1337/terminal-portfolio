@@ -1,8 +1,9 @@
 import { Link } from "next-view-transitions"
 import { site } from "@/lib/site"
 import { navLinks } from "@/lib/nav"
-import { ArrowRight, Download, Flag, Github, Gitlab, Linkedin, Rss } from "@/components/ui/icons"
+import { ArrowRight, Flag, Github, Gitlab, Linkedin, Rss } from "@/components/ui/icons"
 import Scramble from "@/components/motion/scramble"
+import ResumeMenu from "@/components/ui/resume-menu"
 import TerminalHint from "./terminal-hint"
 
 export default function SiteFooter() {
@@ -24,9 +25,7 @@ export default function SiteFooter() {
           <Link href="/contact" className="btn btn--primary">
             Open a channel <ArrowRight size={16} />
           </Link>
-          <a href={site.resume.aiSecurity} download className="btn btn--ghost">
-            <Download size={16} /> Résumé
-          </a>
+          <ResumeMenu className="btn btn--ghost" placement="top" />
           <a href={site.github} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
             <Github size={16} /> GitHub
           </a>

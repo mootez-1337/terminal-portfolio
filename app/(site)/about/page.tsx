@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react"
 import type { Metadata } from "next"
-import { site } from "@/lib/site"
+import { resumes, site } from "@/lib/site"
+import ResumeMenu from "@/components/ui/resume-menu"
+import Sigil from "@/components/ui/sigil"
 import { achievements, community, education, experience, intro, languages, publications, skills } from "@/content/about"
 import PageHeader from "@/components/ui/page-header"
 import SectionHeading from "@/components/ui/section-heading"
@@ -37,8 +39,7 @@ export default function AboutPage() {
           <figure className="avatar-frame" data-reveal="left">
             <span className="card__brackets" aria-hidden="true" />
             <div className="avatar-frame__img">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/avatar.png" alt={`${site.handle} avatar`} width={300} height={300} decoding="async" />
+              <Sigil label={site.handle} />
               <span className="avatar-frame__scan" aria-hidden="true" />
             </div>
             <figcaption>
@@ -53,9 +54,7 @@ export default function AboutPage() {
             </p>
             <p>{intro.body}</p>
             <div className="btn-row">
-              <a href={site.resume.aiSecurity} download className="btn btn--primary">
-                <Download size={16} /> Download résumé
-              </a>
+              <ResumeMenu className="btn btn--primary" label="Download résumé" />
               <a href={site.github} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
                 <Github size={16} /> GitHub
               </a>
@@ -239,16 +238,18 @@ export default function AboutPage() {
       {/* Resume */}
       <section className="container section" aria-labelledby="resume-title">
         <SectionHeading id="resume-title" code="03.9" label="wget resume.pdf" title="Résumé" />
-        <div data-reveal>
-          <a href={site.resume.aiSecurity} download className="card resume-tile" data-fx="tilt">
-            <span className="card__brackets" aria-hidden="true" />
-            <FileText size={28} />
-            <span>
-              <span className="resume-tile__title">Résumé</span>
-              <span className="resume-tile__meta">PDF • AI &amp; offensive security</span>
-            </span>
-            <Download size={20} className="resume-tile__dl" />
-          </a>
+        <div className="resume-tiles" data-reveal>
+          {resumes.map((r) => (
+            <a key={r.id} href={r.href} download className="card resume-tile" data-fx="tilt">
+              <span className="card__brackets" aria-hidden="true" />
+              <FileText size={28} />
+              <span>
+                <span className="resume-tile__title">{r.label}</span>
+                <span className="resume-tile__meta">PDF • {r.meta}</span>
+              </span>
+              <Download size={20} className="resume-tile__dl" />
+            </a>
+          ))}
         </div>
 
         <div className="page-note" data-reveal>
