@@ -13,7 +13,7 @@ import HudClock from "./hud-clock"
 const ROLES = [
   "AI offensive security",
   "Red-teaming LLMs @ AnTitech",
-  "CTF player · CSAW '26 finalist",
+  "CTF player · CSAW '26 world champion",
   "Challenge author",
   "Cybersecurity Master's student",
 ]
@@ -22,7 +22,7 @@ const ROLES = [
 const READOUT: [string, string][] = [
   ["target", "LLMs · chatbots · agents"],
   ["vectors", "jailbreak / prompt injection / data poisoning"],
-  ["last op", "CSAW CTF '26 — #1 MENA · #2 world"],
+  ["last op", "CSAW CTF '26 Finals — #1 world"],
   ["research", "IEEE WETICE '26 — accepted"],
   ["base", "Ariana, Tunisia"],
   ["status", "open to opportunities"],

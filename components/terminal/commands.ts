@@ -102,7 +102,7 @@ function neofetch(): Line[] {
     ["Host", site.url.replace("https://", "")],
     ["Operator", site.name],
     ["Focus", "AI offensive security · LLM red-teaming"],
-    ["CTF", "CSAW '26 quals — 1st MENA, 2nd worldwide"],
+    ["CTF", "CSAW '26 Finals — 1st worldwide 🏆"],
     ["Research", "IEEE WETICE 2026 — Paris"],
     ["Location", site.location],
   ]

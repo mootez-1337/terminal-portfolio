@@ -137,8 +137,8 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
-    title: "CSAW CTF 2026",
-    description: "Quals 1st in MENA / 2nd worldwide — qualified for Finals",
+    title: "CSAW CTF 2026 Finals",
+    description: "🏆 1st place worldwide — Final Round champions (quals: 1st MENA / 2nd worldwide)",
     date: "2026",
     highlight: true,
   },
